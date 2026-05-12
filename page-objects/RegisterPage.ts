@@ -1,4 +1,4 @@
-import {Locator, Page} from '@playwright/test';
+import {expect, Locator, Page} from '@playwright/test';
 
 export class RegisterPage {
     readonly page: Page;
@@ -8,7 +8,6 @@ export class RegisterPage {
     readonly signUpButton: Locator;
     readonly signUpHeader: Locator;
     readonly haveAnAccountLink: Locator;
-    
 
     constructor(page: Page) {
         this.page = page;
@@ -24,4 +23,15 @@ export class RegisterPage {
         await this.page.goto('/register');
     }
 
+    async registerNewUser(username: string, email: string, password: string) {
+        await this.usernameInput.fill(username);
+        await this.emailInput.fill(email);
+        await this.passwordInput.fill(password);
+        await this.signUpButton.click();
+    }
+
+    async verifyHeaderText(){
+        await expect(this.signUpHeader).toHaveText('Sign up');
+    }
+ 
 }

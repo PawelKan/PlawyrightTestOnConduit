@@ -1,4 +1,4 @@
-import { Locator, Page } from '@playwright/test';
+import {expect, Locator, Page } from '@playwright/test';
 
 export class NavbarForLoggedInUser {
   readonly page: Page;
@@ -18,5 +18,10 @@ export class NavbarForLoggedInUser {
   }
   async navigate() {
     await this.page.goto('/');
+  }
+
+  async verifyUserIsLoggedIn(userName: string){
+        await expect(this.userProfileLink).toHaveText(userName);
+        await expect(this.page).toHaveURL('/');    
   }
 }

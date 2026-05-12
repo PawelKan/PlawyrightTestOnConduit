@@ -1,4 +1,4 @@
-import { Locator, Page } from '@playwright/test';
+import { expect, Locator, Page } from '@playwright/test';
 
 export class HomePageContent {
   readonly page: Page;
@@ -16,5 +16,12 @@ export class HomePageContent {
   }
   async navigate() {
     await this.page.goto('/');
+  }
+
+  async verifyHomePageContentForNotLoggedInUser(){
+    await expect(this.globalFeedTab).toHaveText('Global Feed');
+    await expect(this.yourFeedTab).toHaveText('Your Feed');
+    await expect(this.headerOneConduit).toHaveText('conduit');
+    await expect(this.paragraphAPlaceToShareYourKnowledge).toHaveText('A place to share your knowledge.');
   }
 }
