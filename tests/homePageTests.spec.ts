@@ -1,14 +1,14 @@
 import { test, expect } from '@playwright/test';
-import { NavbarForNotLoggedIn } from '../page-objects/NavbarForNotLoggedIn';
+import { NavbarForNotLoggedInUser } from '../page-objects/NavbarForNotLoggedInUser';
 import { HomePageContent } from '../page-objects/HomePageContent';
 
 test.describe('Home page tests for not logged in user', () => {
-  let navBarForNotLoggedIn: NavbarForNotLoggedIn;
+  let navBarForNotLoggedIn: NavbarForNotLoggedInUser;
   let homePageContent: HomePageContent;
 
   test.beforeEach('go to page', async ({page}) => {
     //Given
-    navBarForNotLoggedIn = new NavbarForNotLoggedIn(page);
+    navBarForNotLoggedIn = new NavbarForNotLoggedInUser(page);
     homePageContent = new HomePageContent(page);
 
 

@@ -1,6 +1,6 @@
-import { expect, Locator, Page } from '@playwright/test';
+import { Locator, Page } from '@playwright/test';
 
-export class NavbarForNotLoggedIn {
+export class NavbarForNotLoggedInUser {
   readonly page: Page;
   readonly signInLink: Locator;
   readonly signUpLink: Locator;
