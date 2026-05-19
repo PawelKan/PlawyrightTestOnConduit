@@ -1,30 +1,23 @@
-import { test, expect } from '@playwright/test';
-import { HomePageContent } from '../pages/HomePageContent';
-import { RegisterPage } from '../pages/RegisterPage';
+import { test, expect } from '../fixtures/fixtures';
 
 test.describe('Home page tests for not logged in user', () => {
-  let onHomePage: HomePageContent;
-  let onRegisterPage: RegisterPage;
 
-  test.beforeEach('go to page', async ({page}) => {
+  test.beforeEach('go to page', async ({onHomePage}) => {
     //Given
-    onHomePage = new HomePageContent(page);
-    onRegisterPage = new RegisterPage(page);
     await onHomePage.openPage();
   })
 
-test('has title', async ({ page }) => {
-  // Expect a title "to contain" a substring.
-  await expect(page).toHaveTitle(/Conduit/);
+test('Home page has title Conduit', async ({ onHomePage }) => {
+  await expect(onHomePage.page).toHaveTitle(/Conduit/);
 });
 
-test('check elements on home page when user is not logged in', async ({ page }) => {
+test('check elements on home page when user is not logged in', async ({ onHomePage }) => {
   //Then
   await onHomePage.header.verifyUserIsNotLoggedIn();
   await onHomePage.verifyHomePageContentForNotLoggedInUser();
 })
 
-test('navigation to Sign up (register page) and back works correctly', async ({ page }) => {
+test('navigation to Sign up (register page) and back works correctly', async ({ onHomePage, onRegisterPage }) => {
   //When
   await onHomePage.header.clickOnSignUpLink();
   await onRegisterPage.verifyHeaderText();
@@ -34,7 +27,7 @@ test('navigation to Sign up (register page) and back works correctly', async ({ 
   await expect(onHomePage.paragraphAPlaceToShareYourKnowledge).toBeVisible();
 });
 
-test.fixme('navigation to Sign in page and back works correctly', async ({ page }) => {
+test.fixme('navigation to Sign in page and back works correctly', async ({ onHomePage, onRegisterPage }) => {
   //When
   await onHomePage.header.clickOnSignInLink();
   //await loginPage.verifyHeaderText(); //add verification for sign in page title header later
