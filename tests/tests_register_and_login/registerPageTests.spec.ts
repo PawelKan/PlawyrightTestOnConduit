@@ -1,8 +1,5 @@
-import { test, expect } from '../fixtures/fixtures';
+import { test } from '../fixtures/fixtures';
 import { faker } from '@faker-js/faker';
-import { RegisterPage } from '../pages/RegisterPage';
-import { HomePage } from '../pages/HomePage';
-
 
 test.describe('Register page tests', () =>{
 
