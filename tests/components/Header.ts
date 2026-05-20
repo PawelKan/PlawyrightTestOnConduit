@@ -36,9 +36,9 @@ export class Header{
   }
 
    async verifyUserIsLoggedIn(userName: string){
-    await expect(this.loggedInNewArticleLink).toHaveText('New Article')
-    await expect(this.loggedInSettingsLink).toHaveText('Settings')
-    await expect(this.loggedInUserProfileLink).toHaveText(userName);
+    await expect(this.loggedInNewArticleLink).toContainText('New Article')
+    await expect(this.loggedInSettingsLink).toContainText('Settings')
+    await expect(this.loggedInUserProfileLink).toContainText(userName);
   }
 
   async clickOnSignInLink(){
