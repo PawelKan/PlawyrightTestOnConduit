@@ -3,7 +3,7 @@ import { faker } from '@faker-js/faker';
 
 test.describe('Register page tests', () =>{
 
-    test.beforeEach('go to page', async ({onRegisterPage}) => {
+    test.beforeEach('go to Register Page', async ({onRegisterPage}) => {
         //Given
         await onRegisterPage.openPage();
     });
@@ -21,6 +21,6 @@ test.describe('Register page tests', () =>{
         await onHomePage.header.verifyUserIsLoggedIn(userName);
     });
 
-    test.fixme ('register new user with already used email', async ({ onRegisterPage }) => {
+    test.fixme ('should not be able to register new user with already used email', async ({ onRegisterPage }) => {
     });
 })

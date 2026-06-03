@@ -2,7 +2,7 @@ import { test, expect } from '../fixtures/fixtures';
 
 test.describe('Login page tests', () =>{
 
-    test.beforeEach('go to page', async ({onLoginPage}) => {
+    test.beforeEach('go to Login page', async ({onLoginPage}) => {
         //Given
         await onLoginPage.openPage();
     });
