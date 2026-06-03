@@ -8,7 +8,7 @@ test.describe('Register page tests', () =>{
         await onRegisterPage.openPage();
     });
 
-    test('register new user with fake data', async ({ onRegisterPage, onHomePage }) => {
+    test('should be able to register new user with fake data', async ({ onRegisterPage, onHomePage }) => {
         //Given
         const userName = faker.internet.username();
         const userMail = faker.internet.email();
