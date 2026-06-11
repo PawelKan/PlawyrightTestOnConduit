@@ -1,34 +1,38 @@
-import {test, expect, Page, Locator} from '@playwright/test';
+import { test, expect, Page, Locator } from '@playwright/test';
 import { BasePage } from './BasePage';
 
-export class LoginPage extends BasePage{
-    constructor(page: Page){
+export class LoginPage extends BasePage {
+    constructor(page: Page) {
         super(page)
     }
 
-    get url() : string { return '/login';}
+    get url(): string { return '/login'; }
 
     get headerOne(): Locator {
-        return this.page.getByRole('heading', {name: 'Sign in', level: 1})
+        return this.page.getByRole('heading', { name: 'Sign in', level: 1 })
     }
 
-    get needAnAccountLink(): Locator{
-        return this.page.getByRole('link', {name: "Need an account?"})
+    get needAnAccountLink(): Locator {
+        return this.page.getByRole('link', { name: "Need an account?" })
     }
 
-    get emailInput(): Locator{
-        return this.page.getByRole('textbox', {name: 'Email'})
+    get emailInput(): Locator {
+        return this.page.getByRole('textbox', { name: 'Email' })
     }
 
-    get passwordInput(): Locator{
-        return this.page.getByRole('textbox', {name: 'Password'})
+    get passwordInput(): Locator {
+        return this.page.getByRole('textbox', { name: 'Password' })
     }
 
-    get signInButton(): Locator{
-        return this.page.getByRole('button', {name: 'Sign in'})
+    get signInButton(): Locator {
+        return this.page.getByRole('button', { name: 'Sign in' })
     }
 
-    async verifyElements(): Promise<void>{
+    get signInHeader(): Locator {
+        return this.page.getByRole('heading', {level: 1, name: 'Sign in'})
+    }
+
+    async verifyElements(): Promise<void> {
         await expect(this.headerOne).toContainText('Sign in')
         await expect(this.needAnAccountLink).toContainText('Need an account?')
         await expect(this.emailInput).toBeVisible()
@@ -36,9 +40,13 @@ export class LoginPage extends BasePage{
         await expect(this.signInButton).toBeVisible()
     }
 
-    async loginAsUser(email?: string, password?: string): Promise<void>{
-        if (email){ await this.emailInput.fill(email) }
-        if (password) { await this.passwordInput.fill(password)}
+    async loginAsUser(email?: string, password?: string): Promise<void> {
+        if (email) { await this.emailInput.fill(email) }
+        if (password) { await this.passwordInput.fill(password) }
         await this.signInButton.click();
+    }
+
+    async verifyHeaderText(){
+        await expect(this.signInHeader).toHaveText('Sign in');
     }
 }
