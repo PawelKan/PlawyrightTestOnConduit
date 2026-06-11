@@ -1,34 +1,43 @@
-import {expect, Locator, Page} from '@playwright/test';
+import { expect, Locator, Page } from '@playwright/test';
 import { BasePage } from './BasePage';
 
-export class RegisterPage extends BasePage{
+export class RegisterPage extends BasePage {
     constructor(page: Page) {
         super(page)
     }
 
-    get url(){
+    get url() {
         return '/register'
     }
 
-    get usernameInput(): Locator{
+    get usernameInput(): Locator {
         return this.page.getByRole('textbox', { name: 'Username' });
-        
+
     }
-    get emailInput(): Locator{
+    
+    get emailInput(): Locator {
         return this.page.getByRole('textbox', { name: 'Email' });
     }
-    get passwordInput(): Locator{
+    
+    get passwordInput(): Locator {
         return this.page.getByRole('textbox', { name: 'Password' });
     }
-    get signUpButton(): Locator{
+    
+    get signUpButton(): Locator {
         return this.page.getByRole('button', { name: 'Sign up' });
     }
-    get signUpHeader(): Locator{
+    
+    get signUpHeader(): Locator {
         return this.page.getByRole('heading', { level: 1, name: 'Sign up' });
     }
-    get haveAnAccountLink(): Locator{
+
+    get haveAnAccountLink(): Locator {
         return this.page.getByRole('link', { name: 'Have an account?' });
-    }    
+    }
+
+    get errorMesage(): Locator {
+        return this.page.getByText('Registration failed. Username or email might be taken.')
+    }
 
     async registerNewUser(username: string, email: string, password: string) {
         await this.usernameInput.fill(username);
@@ -37,8 +46,12 @@ export class RegisterPage extends BasePage{
         await this.signUpButton.click();
     }
 
-    async verifyHeaderText(){
+    async verifyHeaderText() {
         await expect(this.signUpHeader).toHaveText('Sign up');
     }
- 
+
+    async verifyErrorMessage() {
+        await expect(this.errorMesage).toBeVisible()
+    }
+
 }
