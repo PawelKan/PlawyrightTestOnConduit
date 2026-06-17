@@ -1,5 +1,6 @@
 import { test } from '../fixtures/fixtures';
 import { faker } from '@faker-js/faker';
+import * as fileReadHelper from "../helpers/fileReadHelper"
 
 test.describe('Register page tests', () => {
 
@@ -22,13 +23,15 @@ test.describe('Register page tests', () => {
     });
 
     test('should not be able to register new user with already used email', async ({ onRegisterPage }) => {
-        await onRegisterPage.registerNewUser("UsernameTest", process.env.USER_MAIL!, "Password123");
+        const userData = fileReadHelper.getUserData()
+        await onRegisterPage.registerNewUser("UsernameTest", userData.USER_MAIL, "Password123");
         await onRegisterPage.verifyErrorMessage();
     });
 
     test('should not be able to register new user with already used username', async ({ onRegisterPage }) => {
         const userMail = faker.internet.email();
-        await onRegisterPage.registerNewUser(process.env.USER_NAME!, userMail, "Password123");
+        const userData = fileReadHelper.getUserData()
+        await onRegisterPage.registerNewUser(userData.USER_NAME, userMail, "Password123");
         await onRegisterPage.verifyErrorMessage();
     });
 })

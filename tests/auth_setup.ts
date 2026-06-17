@@ -1,10 +1,11 @@
-import { request, expect } from "@playwright/test";
 import { test as setup } from "./fixtures/fixtures";
 import { faker } from '@faker-js/faker'
+import * as fileReadHelper from "./helpers/fileReadHelper"
 
-const pathToFile = "tests/.auth/RegisteredUserAuth.json";
+const pathToSessionFile = "tests/.auth/RegisteredUserAuth.json";
 
 setup("Register user with automatic login into app", async ({ page }) => {
+
   //register and login have same cookies/local storage
   await page.goto("/");
   //get csrf token from html attribute
@@ -37,13 +38,13 @@ setup("Register user with automatic login into app", async ({ page }) => {
   const status = requestLoginUser.status();
   if (status === 200) {
     await page.waitForURL("**/");
-    await page.context().storageState({ path: pathToFile });
-    process.env.USER_NAME = userName.toString();
-    process.env.USER_MAIL = userMail;
-    process.env.USER_PASS = userPass;
+    await page.context().storageState({ path: pathToSessionFile });
   } else {
     console.log(
       `[Setup] Użytkownik nie został zarejestrowany (Status: ${status}). Pomijam aktualizację danych.`,
     );
   }
+
+  //save user data to file
+  fileReadHelper.saveUserData(userName.toString(), userMail.toString(), userPass.toString() )
 });
