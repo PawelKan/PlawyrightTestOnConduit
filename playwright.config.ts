@@ -35,10 +35,12 @@ export default defineConfig({
 
   /* Configure projects for major browsers */
   projects: [
-    { name: 'setup', testMatch: 'auth_setup.ts'},
+    {
+      name: 'setup', testMatch: 'auth_setup.ts'
+    },
     {
       name: 'chromium',
-      use: { ...devices['Desktop Chrome'] },
+      use: { ...devices['Desktop Chrome'], storageState: "tests/.auth/RegisteredUserAuth.json" },
       dependencies: ['setup']
     },
 

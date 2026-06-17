@@ -68,3 +68,8 @@ import { test, expect } from '@playwright/test';
 
 //         await page.context().storageState({ path: pathToFile });
 // })
+// test("request api - register user with csrf token", async ({ page, request }) => {
+//   const homeResponse = await request.get("/");
+//   const html = await homeResponse.text();
+//   console.log(html)
+// })

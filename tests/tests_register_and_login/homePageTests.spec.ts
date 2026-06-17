@@ -2,6 +2,8 @@ import { test, expect } from '../fixtures/fixtures';
 
 test.describe('Home page tests for not logged in user', () => {
 
+  test.use({ storageState: { cookies: [], origins: [] } });
+
   test.beforeEach('go to Home Page', async ({ onHomePage }) => {
     //Given
     await onHomePage.openPage();
